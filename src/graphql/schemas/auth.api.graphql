@@ -1,0 +1,32 @@
+extend type Query {
+	authUser: User
+}
+
+extend type Mutation {
+	signIn(email: String, password: String): SignInStatus!
+	signUp(SignUpInput: SignUpInput!): SignUpStatus!
+	# updatePersonalInfo(firsName: String!): User
+	# changePassword(password: String!, newPassword: String!, reNewPassword: String!): Boolean!
+}
+
+input SignUpInput {
+	email: String!
+	password: String!
+	confirm: String!
+	firstName: String!
+	lastName: String!
+	role: String
+}
+
+type SignInStatus {
+	success: Boolean!
+	message: String!
+	token: String
+	errors: [String]
+}
+
+type SignUpStatus {
+	success: Boolean!
+	message: String!
+	created: User
+}

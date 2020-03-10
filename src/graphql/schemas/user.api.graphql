@@ -1,0 +1,55 @@
+extend type Query {
+  allUsers: AllUsersResponse
+  userById(id: String): UserResponse
+  findManyUsers(param: Params): AllUsersResponse
+}
+
+extend type Mutation {
+  createUser(data: UserInput): UserResponse!
+  deleteUser(id: String!): UserResponse
+  updateUser(user: UserInput): UserResponse
+}
+
+type User {
+  id: ID!
+  firstName: String
+  lastName: String
+  email: String
+  confirmed: Boolean
+  role: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type UserResponse {
+  success: Boolean!
+  message: String!
+  user: User
+}
+
+type AllUsersResponse {
+  success: Boolean!
+  message: String!
+  users: [User]
+}
+
+input Params {
+  name: String
+  role: String
+  confirmed: Boolean
+  firstName: String
+  lastName: String
+  email: String
+  facebook: String
+  instagram: String
+}
+
+input UserInput {
+  firstName: String
+  lastName: String
+  email: String!
+  password: String!
+  confirm: String!
+  confirmed: Boolean
+  role: String
+}

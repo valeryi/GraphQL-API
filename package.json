@@ -1,0 +1,44 @@
+{
+  "name": "cocoon-api",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "src/server.js",
+  "scripts": {
+    "start": "set NODE_ENV=production&&babel-watch src/server.js",
+    "dev": "babel-watch src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-express": "^2.9.14",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "graphql": "^14.5.8",
+    "graphql-depth-limit": "^1.1.0",
+    "graphql-iso-date": "^3.6.1",
+    "graphql-middleware": "^4.0.2",
+    "graphql-shield": "^7.0.6",
+    "graphql-tag": "^2.10.1",
+    "graphql-toolkit": "^0.7.5",
+    "graphql-tools": "^4.0.6",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "merge-graphql-schemas": "^1.7.4",
+    "mongoose": "^5.8.3",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/node": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "babel-plugin-import-graphql": "^2.7.0",
+    "babel-watch": "^7.0.0",
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.2"
+  }
+}
