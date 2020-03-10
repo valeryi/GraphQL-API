@@ -2,8 +2,7 @@ import * as jwt from 'jsonwebtoken';
 import { logger } from './logging';
 import { env } from '../environment';
 
-// const secret = env.TOKEN_SECRET;
-const secret = env.token_secret;
+const secret = env.TOKEN_SECRET;
 
 export function sign(payload) {
   const options = {
