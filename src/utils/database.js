@@ -7,13 +7,9 @@ class Database {
   constructor() {
 
     this._provider = 'MongoDB';
-    // this._username = env.DB.USERNAME;
-    // this._password = env.DB.PASSWORD;
-    // this._dbName = env.DB.NAME;
-
-    this._username = env.db.username;
-    this._password = env.db.password;
-    this._dbName = env.db.name;
+    this._username = env.DB.USERNAME;
+    this._password = env.DB.PASSWORD;
+    this._dbName = env.DB.NAME;
 
   }
 

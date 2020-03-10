@@ -4,8 +4,7 @@ import { env } from '../environment';
 import { authService } from '../services/auth.service';
 import { logger } from '../utils/logging';
 
-// const secret = env.TOKEN_SECRET;
-const secret = env.token_secret;
+const secret = env.TOKEN_SECRET;
 const router = Router();
 const crypter = new SimpleCrypto(secret);
 
