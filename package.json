@@ -42,6 +42,7 @@
     "@babel/preset-env": "^7.7.7",
     "babel-plugin-import-graphql": "^2.7.0",
     "babel-watch": "^7.0.0",
+    "core-js": "^3.6.4",
     "dotenv": "^8.2.0",
     "nodemon": "^2.0.2"
   }
