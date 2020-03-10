@@ -2,7 +2,7 @@ import { User } from "../models/user.model";
 import BaseService from "./base.service";
 import { compareSync, hashSync } from "bcryptjs";
 import SimpleCrypto from 'simple-crypto-js';
-import { env } from "../../environment";
+import { env } from "../environment";
 import { logger } from "../utils/logging";
 import { mailService } from '../services/mail.service';
 

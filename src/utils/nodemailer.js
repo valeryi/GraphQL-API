@@ -4,7 +4,7 @@
 
 import nodemailer from 'nodemailer';
 import { logger } from './logging';
-import { env } from '../../environment'
+import { env } from '../environment'
 
 
 export async function sendEmail(data) {

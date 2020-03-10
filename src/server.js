@@ -1,11 +1,11 @@
-import { env } from "../environment";
+import { env } from "./environment";
 import { apiExplorer } from "./graphql";
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { database } from "./utils/database";
 import { logger } from "./utils/logging";
 import { verify } from "./utils/jwt";
-import confirmRoute from '../src/routes/confirm';
+import confirmRoute from './routes/confirm';
 
 // import depthLimit from 'graphql-depth-limit';
 

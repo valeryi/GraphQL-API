@@ -1,10 +1,11 @@
 import { Router } from 'express';
 import SimpleCrypto from 'simple-crypto-js';
-import { env } from '../../environment';
+import { env } from '../environment';
 import { authService } from '../services/auth.service';
 import { logger } from '../utils/logging';
 
-const secret = env.TOKEN_SECRET;
+// const secret = env.TOKEN_SECRET;
+const secret = env.token_secret;
 const router = Router();
 const crypter = new SimpleCrypto(secret);
 

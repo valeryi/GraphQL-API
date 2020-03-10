@@ -1,13 +1,17 @@
 import { readdirSync } from 'fs';
 import path from "path";
-import { logger } from '../src/utils/logging';
+import { logger } from '../utils/logging';
 import { merge } from "lodash";
+
+import { development } from './development';
 
 // FIXME: Function returns a Promise with the data.
 // It's not comfortable and seem a bad practice - too much code for a simple task,
 // and deal with a promise what may outcome in decreasing perfomance
 // ( The simplest code, the fastest code )
-export const env = getEnvironment();
+export const env = development;
+
+// getEnvironment();
 
 // TODO: Rewrite this function into a class Environment to keep it organized and implement ES6 standart
 function getEnvironment() {
