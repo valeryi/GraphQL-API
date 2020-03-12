@@ -26,9 +26,10 @@ class AuthService extends BaseService {
       throw new AuthenticationError(`Email address is not confirmed yet. First, confirm your email address!`, { errors: ['email not confirmed'] })
     }
 
-    delete user.password;
+    // TODO: Remove 'password' property from the object. delete user.password - doesn't work 
+    user.password = null;
 
-    const token = sign(user);
+    const token = sign({ userData: user });
 
     return {
       success: true, message: 'Logged in successfully!', token
