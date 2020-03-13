@@ -1,5 +1,5 @@
 import { userService } from "../../services/user.service";
-import { UserInputError, ApolloError } from 'apollo-server-express';
+import { UserError } from '../../utils/ErrorClasses/CustomErrors';
 
 export const UserResolvers = {
   Query: {
@@ -7,12 +7,12 @@ export const UserResolvers = {
     allUsers: async (obj, args, context, info) => {
       return await userService.fetchAllUsers();
     },
-    userById: async (obj, { id }, context, info) => {
+    fetchUser: async (obj, { id }, context, info) => {
       return await userService.fetchUser(id);
     },
-    findManyUsers: async (obj, { param }, context, info) => {
-      return await userService.findManyUsers(param);
-    }
+    // findManyUsers: async (obj, { param }, context, info) => {
+    //   return await userService.findManyUsers(param);
+    // }
   },
 
   Mutation: {
@@ -21,14 +21,12 @@ export const UserResolvers = {
 
       const user = await userService.findByEmail(data.email);
 
-      if (user.success) {
-        user.success = false;
-        user.user = null;
-        user.errors = ['already exists'];
-        return user;
+      if (user) {
+        throw new UserError('User already exists')
       }
 
       data.confirmed = true;
+
       return userService.createUser(data).then(created => {
         return created;
       });
@@ -38,8 +36,8 @@ export const UserResolvers = {
       return await userService.deleteUser(id);
     },
 
-    updateUser: (obj, { id, update }, context, info) => {
-      return userService.updateUser(id, update);
+    updateUser: (obj, { data }, context, info) => {
+      return userService.updateUser(data.id, data.update);
     }
   }
 }

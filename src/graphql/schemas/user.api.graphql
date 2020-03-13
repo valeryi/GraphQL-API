@@ -1,55 +1,48 @@
 extend type Query {
-  allUsers: AllUsersResponse
-  userById(id: String): UserResponse
-  findManyUsers(param: Params): AllUsersResponse
+	allUsers: [User]
+	fetchUser(id: String): User
+	# findManyUsers(param: Params): [User]
 }
 
 extend type Mutation {
-  createUser(data: UserInput): UserResponse!
-  deleteUser(id: String!): UserResponse
-  updateUser(user: UserInput): UserResponse
+	createUser(data: UserInput): User!
+	deleteUser(id: String!): User
+	updateUser(data: UpdateInput): User!
 }
 
 type User {
-  id: ID!
-  firstName: String
-  lastName: String
-  email: String
-  confirmed: Boolean
-  role: String
-  createdAt: DateTime
-  updatedAt: DateTime
-}
-
-type UserResponse {
-  success: Boolean!
-  message: String!
-  user: User
-}
-
-type AllUsersResponse {
-  success: Boolean!
-  message: String!
-  users: [User]
+	_id: ID!
+	firstName: String
+	lastName: String
+	email: String
+	confirmed: Boolean
+	role: String
+	createdAt: DateTime
+	updatedAt: DateTime
 }
 
 input Params {
-  name: String
-  role: String
-  confirmed: Boolean
-  firstName: String
-  lastName: String
-  email: String
-  facebook: String
-  instagram: String
+	name: String
+	role: String
+	confirmed: Boolean
+	firstName: String
+	lastName: String
+	email: String
+	facebook: String
+	instagram: String
 }
 
 input UserInput {
-  firstName: String
-  lastName: String
-  email: String!
-  password: String!
-  confirm: String!
-  confirmed: Boolean
-  role: String
+	firstName: String
+	lastName: String
+	email: String!
+	password: String!
+	confirm: String!
+	confirmed: Boolean
+	role: String
+}
+
+input UpdateInput {
+	id: String
+	update: Params
 }

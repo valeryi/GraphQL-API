@@ -1,5 +1,5 @@
 import { logger } from "../utils/logging";
-import { DBError } from '../utils/ErrorClasses/CustomErrors';
+import { DBError, UserError } from '../utils/ErrorClasses/CustomErrors';
 
 export default class BaseService {
 
@@ -49,20 +49,18 @@ export default class BaseService {
     return this.model.findByIdAndUpdate(id, data)
       .then(updated => Object.assign(updated._doc, data))
       .catch(err => {
-        throw new DBError(`Error occured trying to update with: ${data}`);
+        throw new DBError(`Error occured trying to update: ${err}`);
       })
   }
 
-  // delete(id) {
-  //   return this.model.findByIdAndDelete(id)
-  //     .then(deleted => {
-  //       return { message: `${id} has just been deleted`, success: true, deleted: deleted };
-  //     })
-  //     .catch(err => {
-  //       logger.error(`Error occured trying to delete: ${id}: ${err.message}`);
-  //       return { message: `Error occured trying to delete ${id}: ${err.message}`, success: false, delete: null };
-  //     })
-  // }
+  delete(id) {
+    return this.model.findByIdAndDelete(id)
+      .then(deleted => deleted)
+      .catch(err => {
+        logger.error(`Error occured trying to delete: ${id}: ${err.message}`);
+        throw new DBError(`Error occured trying to delete ${id}: ${err.message}`);
+      })
+  }
 
   create(data) {
 

@@ -8,7 +8,7 @@ export const permissions = {
     // users: isAuthorized
   },
   Mutation: {
-    createUser: allow
+    // createUser: allow
   }
 
 };

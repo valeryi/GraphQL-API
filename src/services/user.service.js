@@ -5,6 +5,7 @@ import SimpleCrypto from 'simple-crypto-js';
 import { env } from "../environment";
 import { logger } from "../utils/logging";
 import { mailService } from '../services/mail.service';
+import { UserError } from '../utils/ErrorClasses/CustomErrors';
 
 const HASH_ROUNDS = parseInt(env.HASH_ROUNDS);
 
@@ -17,39 +18,39 @@ class UserService extends BaseService {
   async fetchAllUsers() {
     const users = await userService.findAll();
 
-    if (users.success) {
-      users.users = users.data;
-      delete users.data;
-      return users;
-    }
 
-    return {
-      success: false,
-      message: 'Problems with fetching all users'
-    }
+
+    users.forEach(user => {
+
+      // TODO: Remove password properties not just assign 'null'. - "delete user.password" doesn't work
+      user.password = null;
+
+    });
+
+    return users;
 
   }
 
   async fetchUser(id) {
     const user = await userService.findById(id);
+    console.log(user);
 
-    user.user = user.data;
-    delete user.data;
-
+    // TODO: Remove password properties not just assign 'null'. - "delete user.password" doesn't work
+    user.password = null;
     return user;
   }
 
-  async findManyUsers(param) {
-    const user = await this.findManyBy(param);
+  // async findManyUsers(param) {
+  //   const user = await this.findManyBy(param);
 
-    user.users = user.data;
-    delete user.data;
-    return user;
-  }
+  //   user.users = user.data;
+  //   delete user.data;
+  //   return user;
+  // }
 
   async createUser(data) {
     data.password = await hashSync(data.password, HASH_ROUNDS);
-    delete data.rePassword;
+    data.confirm = null;
 
     data.role = data.role || 'Student';
 
@@ -73,21 +74,36 @@ class UserService extends BaseService {
   }
 
   async deleteUser(id) {
+    const u = await this.findById(id);
+
+    if (!u) {
+      throw new UserError('No user with id: ' + id);
+    }
+
     const user = await this.delete(id);
 
-    user.user = user.deleted;
-    delete user.deleted;
+    if (user) {
+
+      user.deleted = null;
+
+    }
+
     return user;
   }
 
 
 
   async updateUser(id, data) {
-    const user = await this.update(id, data);
+    const u = await this.findById(id);
 
-    user.user = user.updated;
-    delete user.updated;
-    return user;
+    if (!u) {
+      throw new UserError('No user with id: ' + id);
+    }
+
+
+    const r = await this.update(id, data);
+    return r;
+
   }
 }
 

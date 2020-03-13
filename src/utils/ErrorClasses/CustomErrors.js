@@ -21,3 +21,10 @@ export class DBError extends ApolloError {
     super(message, 'DATABASE_ERROR', properties);
   }
 }
+
+export class UserError extends ApolloError {
+
+  constructor(message, properties) {
+    super(message, 'USER_ERROR', properties);
+  }
+}
