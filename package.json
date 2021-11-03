@@ -32,7 +32,7 @@
     "nodemailer": "^6.4.4",
     "password-validator": "^5.0.3",
     "simple-crypto-js": "^2.2.0",
-    "validator": "^12.2.0",
+    "validator": "^13.7.0",
     "winston": "^3.2.1"
   },
   "devDependencies": {
